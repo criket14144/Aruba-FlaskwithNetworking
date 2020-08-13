@@ -50,33 +50,6 @@ IFS=':' read -r var1 var2 <<< "$(lsb_release -d)"
 echo "Installing Carius on $var2"
 fi
 
-# Second step is to upgrade and update Ubuntu
-
-add-apt-repository universe -y  > /dev/null
-(dpkg --configure -a > /dev/null) & spinner $! "Verify DPKG consistency....."
-(DEBIAN_FRONTEND=noninteractive apt-get -qq upgrade  &>/dev/null) & spinner $! "Upgrading the system to ensure that it is up to date....."
-(DEBIAN_FRONTEND=noninteractive apt-get -qq update  &>/dev/null) & spinner $! "Updating the system to ensure that it is up to date....."
-
-
-
-
-# Next is to install all the dependencies
-
-(DEBIAN_FRONTEND=noninteractive apt-get -qq -y -o=Dpkg::Use-Pty=0 install net-tools  &>/dev/null) & spinner $! "Installing Net tools....."
-# (DEBIAN_FRONTEND=noninteractive apt-get -qq -y -o=Dpkg::Use-Pty=0 install nodejs  &>/dev/null) & spinner $! "Installing node.js....."
-# (DEBIAN_FRONTEND=noninteractive apt-get -qq -y -o=Dpkg::Use-Pty=0 install npm  &>/dev/null) & spinner $! "Installing node.js package manager....."
-(DEBIAN_FRONTEND=noninteractive apt-get -qq -y -o=Dpkg::Use-Pty=0 install dos2unix  &>/dev/null) & spinner $! "Installing Dos2Unix....."
-(DEBIAN_FRONTEND=noninteractive apt-get -qq -y -o=Dpkg::Use-Pty=0 install tshark  &>/dev/null) & spinner $! "Installing Tshark....."
-(DEBIAN_FRONTEND=noninteractive apt-get -qq -y -o=Dpkg::Use-Pty=0 install apache2 &> /dev/null) & spinner $! "Installing Apache2....."
-(DEBIAN_FRONTEND=noninteractive apt-get -qq -y -o=Dpkg::Use-Pty=0 install tftpd-hpa &> /dev/null) & spinner $! "Installing TFTP Daemon....."
-(DEBIAN_FRONTEND=noninteractive apt-get -qq -y -o=Dpkg::Use-Pty=0 install mysql-server &> /dev/null) & spinner $! "Installing Mysql Server....."
-(DEBIAN_FRONTEND=noninteractive apt-get -qq -y -o=Dpkg::Use-Pty=0 install mysql-client &> /dev/null) & spinner $! "Installing Mysql Client....."
-
-if ! [ -x "$(command -v python3)" ]; then
-echo 'Error: Python is not installed or it is the incorrect command. Carius requires the   python3   command' >&2
-exit 1
-fi
-
 # Create tftp folder
 
 if [ ! -d "/home/tftpboot" ]; then
@@ -102,22 +75,6 @@ service tftpd-hpa restart
 
 # Install the Python modules
 
-(DEBIAN_FRONTEND=noninteractive apt-get -y install -qq -o=Dpkg::Use-Pty=0 python3-pip &> /dev/null) & spinner $! "Installing Python3 PIP....."
-
-(pip3 install --default-timeout=100 requests > /dev/null) & spinner $! "Installing Python3 requests library....."
-(pip3 install --default-timeout=100 pygal > /dev/null) & spinner $! "Installing Python3 pygal library....."
-(pip3 install --default-timeout=100 flask> /dev/null) & spinner $! "Installing Python3 flask library....."
-(pip3 install --default-timeout=100 flask-bootstrap > /dev/null) & spinner $! "Installing Python3 flask bootstrap library....."
-(pip3 install --default-timeout=100 flask-login > /dev/null) & spinner $! "Installing Python3 flask login library....."
-(pip3 install --default-timeout=100 pycryptodome > /dev/null) & spinner $! "Installing Python3 pycryptodome library....."
-(pip3 install --default-timeout=100 pymysql > /dev/null) & spinner $! "Installing Python3 pymysql library....."
-(pip3 install --default-timeout=100 schedule > /dev/null) & spinner $! "Installing Python3 schedule library....."
-(pip3 install --default-timeout=100 pyshark > /dev/null) & spinner $! "Installing Python3 pyshark library....."
-(pip3 install --default-timeout=100 psutil > /dev/null) & spinner $! "Installing Python3 psutil library....."
-(pip3 install --default-timeout=100 paramiko > /dev/null) & spinner $! "Installing Python3 paramiko library....."
-(pip3 install --default-timeout=100 netmiko > /dev/null) & spinner $! "Installing Python3 netmiko library....."
-(pip3 install --default-timeout=100 waitress > /dev/null) & spinner $! "Installing Python3 waitress library....."
-(pip3 install --default-timeout=100 websockets > /dev/null) & spinner $! "Installing Python3 websockets library....."
 
 # Mysql user, database and table structure creation
 # Depending on the Mysql version, the structure is different
@@ -189,25 +146,6 @@ chmod 777 /var/www/html/startapp.sh
 chmod +x /var/www/html/startapp.sh
 
 tput cnorm
-
-# Final step is to automatically start the startapp.sh when the system boots
-
-cat > /etc/systemd/system/carius.service  << ENDOFFILE
-[Unit]
-Description=Carius
-After=mysql.service
-[Service]
-Type=simple
-WorkingDirectory=/var/www/html
-ExecStart=/var/www/html/startapp.sh
-[Install]
-WantedBy=default.target
-ENDOFFILE
-
-chmod 664 /etc/systemd/system/carius.service
-systemctl daemon-reload &> /dev/null
-systemctl enable carius.service &> /dev/null
-systemctl start carius.service &> /dev/null
 
 echo " ######### Carius 2.0 installation completed ##########"
 echo " Navigate with your browser to http://a.b.c.d:8080   where a.b.c.d is the IP address of the Carius server"
