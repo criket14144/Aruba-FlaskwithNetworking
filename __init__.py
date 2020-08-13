@@ -22,6 +22,9 @@ hostip=s.getsockname()[0]
 
 sys.path.append('../')
 
+# Working directory
+os.chdir('/var/www/html/')
+
 # Start the processes
 
 globalsconf=classes.globalvars()
