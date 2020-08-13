@@ -19,7 +19,8 @@ printf "    \b\b\b\b"
 tput reset
 tput civis
 
-
+service mysql start
+sleep 10
 
 echo "########## Carius 2.0 Installation ##########"
 echo "Ensure that you have an active Internet connection with an acceptable speed (at least 10Mbps recommended)"
