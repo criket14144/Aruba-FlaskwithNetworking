@@ -89,21 +89,21 @@ echo ""
 echo " Configure the database"
 if [[ "$mysqlversion" < "80" ]] ;
 then
- mysql -uroot < ./doc/mysqltable57.txt
+ mysql -uroot < /Aruba-FlaskwithNetworking/doc/mysqltable57.txt
 else
- mysql -uroot < ./doc/mysqltable80.txt
+ mysql -uroot < /Aruba-FlaskwithNetworking/doc/mysqltable80.txt
 fi
 
 echo " Installing the app"
-cp ./__init__.py /var/www/html/__init__.py  > /dev/null
-cp ./startapp.sh /var/www/html/startapp.sh  > /dev/null
-cp ./views/ /var/www/html/ -r > /dev/null
-cp ./static/ /var/www/html/ -r > /dev/null
-cp ./templates/ /var/www/html/ -r > /dev/null
-cp ./classes/ /var/www/html/ -r > /dev/null
-cp ./bash/ /var/www/html/ -r > /dev/null
-cp ./bash/ztpdhcp6k.cfg /home/tftpboot/ztpdhcp6k.cfg > /dev/null
-cp ./bash/ztpdhcp8k.cfg /home/tftpboot/ztpdhcp8k.cfg > /dev/null
+cp /Aruba-FlaskwithNetworking/__init__.py /var/www/html/__init__.py  > /dev/null
+cp /Aruba-FlaskwithNetworking/startapp.sh /var/www/html/startapp.sh  > /dev/null
+cp /Aruba-FlaskwithNetworking/views/ /var/www/html/ -r > /dev/null
+cp /Aruba-FlaskwithNetworking/static/ /var/www/html/ -r > /dev/null
+cp /Aruba-FlaskwithNetworking/templates/ /var/www/html/ -r > /dev/null
+cp /Aruba-FlaskwithNetworking/classes/ /var/www/html/ -r > /dev/null
+cp /Aruba-FlaskwithNetworking/bash/ /var/www/html/ -r > /dev/null
+cp /Aruba-FlaskwithNetworking/bash/ztpdhcp6k.cfg /home/tftpboot/ztpdhcp6k.cfg > /dev/null
+cp /Aruba-FlaskwithNetworking/bash/ztpdhcp8k.cfg /home/tftpboot/ztpdhcp8k.cfg > /dev/null
 
 if [ ! -d "/var/www/html/images" ]; then
 mkdir /var/www/html/images
