@@ -24,7 +24,7 @@ with open(appPath, 'r') as myfile:
 globalconf=json.loads(data)
 
 
-dbconnection=pymysql.connect(host='localhost',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
+dbconnection=pymysql.connect(host='172.28.0.5',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
 cursor=dbconnection.cursor(pymysql.cursors.DictCursor)
 
 

@@ -4,7 +4,7 @@
 import json
 import pymysql.cursors
 
-dbconnection=pymysql.connect(host='localhost',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
+dbconnection=pymysql.connect(host='172.28.0.5',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
 cursor=dbconnection.cursor(pymysql.cursors.DictCursor)
 
 # Change the ztpprofile column to text instead of integer and rename to vrf

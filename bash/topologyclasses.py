@@ -28,7 +28,7 @@ def discoverTopology():
     with open(appPath, 'r') as myfile:
         data=myfile.read()
     globalconf=json.loads(data)
-    dbconnection=pymysql.connect(host='localhost',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
+    dbconnection=pymysql.connect(host='172.28.0.5',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
     cursor=dbconnection.cursor(pymysql.cursors.DictCursor)
     # First step is to get all the devices from the database that have topology discovery enabled
     queryStr="select description,ipaddress,secinfo,ostype, sysinfo from devices where topology='1'"

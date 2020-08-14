@@ -52,7 +52,7 @@ def ztpupdate():
     100 = Successfully pushed the configuration template
     '''
     ztplog = open('/var/www/html/log/ztp.log', 'a')
-    dbconnection=pymysql.connect(host='localhost',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
+    dbconnection=pymysql.connect(host='172.28.0.5',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
     cursor=dbconnection.cursor(pymysql.cursors.DictCursor)
     pathname = os.path.dirname(sys.argv[0])
     appPath = os.path.abspath(pathname) + "/globals.json"

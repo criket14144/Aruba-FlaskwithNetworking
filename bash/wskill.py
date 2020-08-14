@@ -5,7 +5,7 @@ import psutil, sys, os, platform, subprocess, socket
 from subprocess import Popen, PIPE
 import pymysql.cursors
 
-dbconnection=pymysql.connect(host='localhost',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
+dbconnection=pymysql.connect(host='172.28.0.5',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
 cursor=dbconnection.cursor(pymysql.cursors.DictCursor)
 
 for proc in psutil.process_iter():

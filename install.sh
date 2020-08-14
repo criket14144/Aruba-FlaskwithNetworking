@@ -19,8 +19,6 @@ printf "    \b\b\b\b"
 tput reset
 tput civis
 
-service mysql start
-sleep 10
 
 echo "########## Carius 2.0 Installation ##########"
 echo "Ensure that you have an active Internet connection with an acceptable speed (at least 10Mbps recommended)"
@@ -80,7 +78,7 @@ service tftpd-hpa restart
 # Mysql user, database and table structure creation
 # Depending on the Mysql version, the structure is different
 
-varA=($(echo $(mysql -uroot -e "select version();") | tr ')' '\n'))
+"varA=($(echo $(mysql -uroot -e "select version();") | tr ')' '\n'))
 varB=($(echo "${varA[1]}" | tr '-' '\n'))
 varC=($(echo "${varB[0]}" | tr '.' '\n'))
 mysqlversion=${varC[0]}${varC[1]}
@@ -93,7 +91,7 @@ then
  mysql -uroot < /Aruba-FlaskwithNetworking/doc/mysqltable57.txt
 else
  mysql -uroot < /Aruba-FlaskwithNetworking/doc/mysqltable80.txt
-fi
+fi"
 
 echo " Installing the app"
 cp /Aruba-FlaskwithNetworking/__init__.py /var/www/html/__init__.py  > /dev/null

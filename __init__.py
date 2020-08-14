@@ -27,7 +27,7 @@ os.chdir('/var/www/html/')
 
 # Start the processes
 
-os.system("service mysql start")
+# os.system("service mysql start")
 os.system("service tftpd-hpa start")
 
 
@@ -53,7 +53,7 @@ sysadmin.checksysConf()
 
 __name__="carius"
 app=Flask(__name__)
-     
+
 #Make Python definitions calleable in the Jinja template
 app.jinja_env.globals.update(decryptPass=classes.decryptPassword)
 app.jinja_env.globals.update(ctime=classes.convertTime)
@@ -90,8 +90,8 @@ app.register_blueprint(topo)
 from views.tele_metry import tele_metry
 app.register_blueprint(tele_metry)
 
-if (__name__) == "carius": 
+if (__name__) == "carius":
     #serve(app,host='0.0.0.0',port=8080,ident="Carius")
     serve(app,listen="*:8080 [::]:8080", ident="Carius", threads=8)
     #app.run(host=hostip, port=8080, debug=True)
-    
+

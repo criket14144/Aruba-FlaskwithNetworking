@@ -20,7 +20,7 @@ syslogFacilities=("Kernel messages","User-level","Mail system","System daemons",
 "Local use 5 (local5)","Local use 6 (local6)","Local use 7 (local7))")
 syslogSeverity=("Emergency","Alert","Critical","Error","Warning","Notice","Informational","Debug")
 
-dbconnection=pymysql.connect(host='localhost',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
+dbconnection=pymysql.connect(host='172.28.0.5',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
 cursor=dbconnection.cursor(pymysql.cursors.DictCursor)
 
 def capture_live_packets(network_interface,listenerlog,cursor,syslogFacilities,syslogSeverity):

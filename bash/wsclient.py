@@ -21,7 +21,7 @@ import errno
 from urllib.parse import quote, unquote
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
-dbconnection=pymysql.connect(host='localhost',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
+dbconnection=pymysql.connect(host='172.28.0.5',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
 cursor=dbconnection.cursor(pymysql.cursors.DictCursor)
 
 queryStr="select id,ipaddress,secinfo, subscriptions from devices where id='{}'".format(sys.argv[1])

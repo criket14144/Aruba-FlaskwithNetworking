@@ -66,7 +66,7 @@ def globalvars():
 
 
 def sqlQuery(queryStr, command):
-    dbconnection=pymysql.connect(host='localhost',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
+    dbconnection=pymysql.connect(host='172.28.0.5',user='aruba',password='ArubaRocks',db='aruba', autocommit=True)
     with dbconnection.cursor(pymysql.cursors.DictCursor) as cursor:
        if command=="select":
            cursor.execute(queryStr)
