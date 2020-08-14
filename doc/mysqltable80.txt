@@ -1,10 +1,10 @@
 drop database IF EXISTS aruba;
 create database aruba;
 use aruba;
-drop user IF EXISTS 'aruba'@'localhost';
-CREATE USER 'aruba'@'localhost' IDENTIFIED BY 'ArubaRocks';
-GRANT ALL PRIVILEGES ON aruba.* TO 'aruba'@'localhost' WITH GRANT OPTION;
-grant drop on table aruba.* to 'aruba'@'localhost';
+drop user IF EXISTS 'aruba'@'%';
+CREATE USER 'aruba'@'%' IDENTIFIED BY 'ArubaRocks';
+GRANT ALL PRIVILEGES ON aruba.* TO 'aruba'@'%' WITH GRANT OPTION;
+grant drop on table aruba.* to 'aruba'@'%';
 
 DROP TABLE IF EXISTS devices;
 CREATE TABLE IF NOT EXISTS devices (
