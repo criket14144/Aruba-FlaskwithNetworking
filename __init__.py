@@ -27,6 +27,10 @@ os.chdir('/var/www/html/')
 
 # Start the processes
 
+os.system("service mysql start")
+os.system("service tftpd-hpa start")
+
+
 globalsconf=classes.globalvars()
 
 # Start the processes. The scripts are found in the /bash folder
