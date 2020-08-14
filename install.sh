@@ -93,7 +93,7 @@ else
  mysql -uroot < /Aruba-FlaskwithNetworking/doc/mysqltable80.txt
 fi"
 
-echo " Installing the app"
+"echo " Installing the app"
 cp /Aruba-FlaskwithNetworking/__init__.py /var/www/html/__init__.py  > /dev/null
 cp /Aruba-FlaskwithNetworking/startapp.sh /var/www/html/startapp.sh  > /dev/null
 cp /Aruba-FlaskwithNetworking/views/ /var/www/html/ -r > /dev/null
@@ -104,11 +104,13 @@ cp /Aruba-FlaskwithNetworking/bash/ /var/www/html/ -r > /dev/null
 cp /Aruba-FlaskwithNetworking/bash/ztpdhcp6k.cfg /home/tftpboot/ztpdhcp6k.cfg > /dev/null
 cp /Aruba-FlaskwithNetworking/bash/ztpdhcp8k.cfg /home/tftpboot/ztpdhcp8k.cfg > /dev/null
 
+
 if [ ! -d "/var/www/html/images" ]; then
 mkdir /var/www/html/images
 fi
 chmod 777 /var/www/html/images/
 chmod 777 /var/www/html/images
+
 
 echo " Configuring the app"
 
@@ -143,6 +145,8 @@ dos2unix -q /var/www/html/bash/ztp.sh >/dev/null
 dos2unix -q /var/www/html/bash/telemetry.sh >/dev/null
 chmod 777 /var/www/html/startapp.sh
 chmod +x /var/www/html/startapp.sh
+
+"
 
 tput cnorm
 
