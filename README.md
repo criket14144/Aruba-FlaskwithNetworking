@@ -7,25 +7,15 @@
 - Role Based Access Control
 - And more...
 
-Supported Operating System is Ubuntu LTS 18.x, 19.x or 20.x
-
-Installation instructions:
-Have a default Ubuntu installation, 4 GB RAM, 2 CPU
-
-Login into your Ubuntu host as root
-
-Clone the repository into your home folder:
-
-git clone https://github.com/HewlettPackard/Aruba-FlaskwithNetworking.git
-
-cd Aruba-FlaskwithNetworking
-
-chmod 777 ./install.sh    or      chmod +x ./upgrade.sh
-
-Run the ./install.sh script
-
-If you are already running version 1.2 or 1.3, you can upgrade the app:
-
-chmod 777 ./upgrade.sh      or     chmod +x ./upgrade.sh
-
-Run the ./upgrade.sh script
+1.	Install Docker and docker-compose per OS documentation
+2.	Install dos2unix (apt-get/yum install dos2unix)
+3.	git clone  https://github.com/criket14144/Aruba-FlaskwithNetworking.git
+4.	cd Aruba-FlaskwithNetworking
+5.	sudo chmod +x dockerhostsetup.sh
+6.	docker-compose -d up mysql
+7.	docker exec -it mysql /bin/bash
+8.	mysql -u root -p       Testing123 is the password
+9.	Paste the contents of Aruba-FlaskwithNetworking/doc/mysqltable80.txt
+10.	quit;
+11.	exit
+12.	docker-compose up -d
