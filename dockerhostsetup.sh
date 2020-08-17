@@ -48,6 +48,11 @@ echo "########## Carius 2.0 Installation ##########"
 #fi"
 
 echo " Installing the app"
+
+if [ ! -d "/docker/arubaautomation/var/www/html/" ]; then
+mkdir -p /docker/arubaautomation/var/www/html
+fi
+
 cp ../Aruba-FlaskwithNetworking/__init__.py /docker/arubaautomation/var/www/html/__init__.py  > /dev/null
 cp ../Aruba-FlaskwithNetworking/startapp.sh /docker/arubaautomation/var/www/html/startapp.sh  > /dev/null
 cp ../Aruba-FlaskwithNetworking/views/ /docker/arubaautomation/var/www/html/ -r > /dev/null
@@ -55,18 +60,28 @@ cp ../Aruba-FlaskwithNetworking/static/ /docker/arubaautomation/var/www/html/ -r
 cp ../Aruba-FlaskwithNetworking/templates/ /docker/arubaautomation/var/www/html/ -r > /dev/null
 cp ../Aruba-FlaskwithNetworking/classes/ /docker/arubaautomation/var/www/html/ -r > /dev/null
 cp ../Aruba-FlaskwithNetworking/bash/ /docker/arubaautomation/var/www/html/ -r > /dev/null
+
+if [ ! -d "/docker/arubaautomation/tftp" ]; then
+mkdir -p /docker/arubaautomation/tftp
+fi
+
 cp ../Aruba-FlaskwithNetworking/bash/ztpdhcp6k.cfg /docker/arubaautomation/tftp/ztpdhcp6k.cfg > /dev/null
 cp ../Aruba-FlaskwithNetworking/bash/ztpdhcp8k.cfg /docker/arubaautomation/tftp/ztpdhcp8k.cfg > /dev/null
 
 if [ ! -d "/docker/arubaautomation/var/www/html/images" ]; then
-mkdir /docker/arubaautomation/var/www/html/images
+mkdir -p /docker/arubaautomation/var/www/html/images
 fi
 chmod 777 /docker/arubaautomation/var/www/html/images/
 chmod 777 /docker/arubaautomation/var/www/html/images
 
+if [ ! -d "/docker/arubaautomation/var/www/html/bsah" ]; then
+mkdir /docker/arubaautomation/var/www/html/bash
+fi
+
+
 echo " Configuring the app"
 
-activeInterface=$(route | grep '^default' | grep -o '[^ ]*$')
+#activeInterface=$(route | grep '^default' | grep -o '[^ ]*$')
 cat > /docker/arubaautomation/var/www/html/bash/globals.json  << ENDOFFILE
 {"idle_timeout": "3000", "pcap_location": "/var/www/html/bash/trace.pcap", "retain_dhcp": "15", "retain_snmp": "15", "retain_ztplog": "5", "retain_listenerlog": "5", "retain_cleanuplog": "5", "retain_topologylog": "5","retain_syslog": "15","retain_telemetrylog": "5","secret_key": "ArubaRocks!!!!!!", "appPath": "/var/www/html/", "softwareRelease": "2.0", "sysInfo": "","activeInterface":"$activeInterface","ztppassword":"ztpinit","landingpage":"/"}
 ENDOFFILE
